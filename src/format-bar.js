@@ -72,14 +72,10 @@ Object.assign(FormatBar.prototype, require('./function-bind'), require('./mediat
     var selection = window.getSelection(),
         range = selection.getRangeAt(0),
         boundary = range.getBoundingClientRect(),
-        coords = {},
-        scrollTop = this.el.parentNode.scrollTop,
-        // in case the format bar is inside a scrollable container
-        leftOffset = this.el.parentNode.offsetLeft,
-        topOffset = this.el.parentNode.offsetTop;
+        coords = {};
 
-    coords.top = boundary.top + 20 + scrollTop - this.$el.height() - topOffset + 'px';
-    coords.left = ((boundary.left + boundary.right) / 2) - (this.$el.width() / 2) - leftOffset + 'px';
+    coords.top = boundary.top + 20 + window.pageYOffset - this.$el.height() + 'px';
+    coords.left = ((boundary.left + boundary.right) / 2) - (this.$el.width() / 2) + 'px';
 
     this.highlightSelectedButtons();
     this.show();
